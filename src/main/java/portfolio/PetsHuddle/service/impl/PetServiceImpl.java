@@ -67,4 +67,14 @@ public class PetServiceImpl implements PetService {
             return null;
         }
     }
+
+    @Override
+    public void deletePet(int petId) {
+        //check if id really exists first
+        Optional<Pet> existingPet = petrepository.findById(petId);
+        if(existingPet.isPresent()) {
+            petrepository.deleteById(petId);
+        }
+        //fixme handle if pet doesnt exist
+    }
 }

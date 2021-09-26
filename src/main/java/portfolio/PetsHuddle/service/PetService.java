@@ -9,4 +9,5 @@ public interface PetService {
     List<Pet> getAllPets();
     Pet getPetById(int petId);
     Pet updatePet(Pet pet, int petId);
+    void deletePet(int petId);
 }

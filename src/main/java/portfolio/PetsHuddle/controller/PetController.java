@@ -43,4 +43,11 @@ public class PetController {
     public ResponseEntity<Pet> updatePet(@PathVariable("id") int petId, @RequestBody Pet pet) {
         return new ResponseEntity<Pet>(petService.updatePet(pet, petId), HttpStatus.OK);
     }
+
+    //building delete pets rest api
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePet(@PathVariable("id") int petId) {
+        petService.deletePet(petId);
+        return new ResponseEntity<String>("Pet deleted successfully", HttpStatus.OK);
+    }
 }
