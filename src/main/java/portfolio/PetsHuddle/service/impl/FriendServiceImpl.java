@@ -5,6 +5,8 @@ import portfolio.PetsHuddle.model.Friend;
 import portfolio.PetsHuddle.repository.FriendRepository;
 import portfolio.PetsHuddle.service.FriendService;
 
+import java.util.List;
+
 @Service
 public class FriendServiceImpl implements FriendService {
 
@@ -18,5 +20,10 @@ public class FriendServiceImpl implements FriendService {
     public Friend saveFriend(Friend friendObject) {
        friendRepository.save(friendObject);
        return friendObject;
+    }
+
+    @Override
+    public List<Friend> getAllFriends() {
+        return friendRepository.findAll();
     }
 }

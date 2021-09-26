@@ -41,7 +41,7 @@ public class Pet {
     private List<Friend> friendsList = new ArrayList<>();
 
     public Pet() {
-        
+
     }
 
     public Pet(int petId, String petName, String species, String sex, String breed, int age, String petDescription, String userId) {
@@ -89,6 +89,30 @@ public class Pet {
 
     public List<Friend> getFriendsList() {
         return friendsList;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setPetDescription(String petDescription) {
+        this.petDescription = petDescription;
     }
 }
 

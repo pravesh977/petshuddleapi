@@ -2,12 +2,11 @@ package portfolio.PetsHuddle.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import portfolio.PetsHuddle.model.Friend;
 import portfolio.PetsHuddle.service.FriendService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/friendslist")
@@ -25,4 +24,10 @@ public class FriendController {
         ResponseEntity<Friend> newFriend = new ResponseEntity<Friend>(friendService.saveFriend(friend), HttpStatus.CREATED);
         return newFriend;
     }
+
+    @GetMapping
+    public List<Friend> getAllFriends() {
+        return friendService.getAllFriends();
+    }
+
 }

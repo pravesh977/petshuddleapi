@@ -7,4 +7,6 @@ import java.util.List;
 public interface PetService {
     Pet savePet(Pet pet);
     List<Pet> getAllPets();
+    Pet getPetById(int petId);
+    Pet updatePet(Pet pet, int petId);
 }

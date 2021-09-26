@@ -25,8 +25,22 @@ public class PetController {
         return newPet;
     }
 
+    //api for getting all pets
     @GetMapping
     public List<Pet> getAllPets() {
         return petService.getAllPets();
+    }
+
+    //api for getting pet by id
+    @GetMapping("{id}")
+    public ResponseEntity<Pet> getPetById(@PathVariable("id") int petId) {
+        ResponseEntity<Pet> matchingPet = new ResponseEntity<Pet>(petService.getPetById(petId), HttpStatus.OK);
+        return matchingPet;
+    }
+
+    //building update pets api
+    @PutMapping("{id}")
+    public ResponseEntity<Pet> updatePet(@PathVariable("id") int petId, @RequestBody Pet pet) {
+        return new ResponseEntity<Pet>(petService.updatePet(pet, petId), HttpStatus.OK);
     }
 }
