@@ -36,12 +36,13 @@ public class Pet {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
+
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "pet", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "foreign_key_column", referencedColumnName = "pet_id")
     private List<Friend> friendsList = new ArrayList<>();
 
     public Pet() {
-
     }
 
     public Pet(int petId, String petName, String species, String sex, String breed, int age, String petDescription, String userId) {

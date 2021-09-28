@@ -1,8 +1,5 @@
 package portfolio.PetsHuddle.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,23 +14,35 @@ public class Friend {
     @Column(name = "friend_id")
     private int friendId;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
-    private Pet pet;
+    //remove
+    @Column(name = "foreign_key_column")
+    private int foreignKeyColumn;
 
+    public Friend() {
 
-    public Friend(int petFriendUid, int friendId, Pet pet) {
-        this.petFriendUid = petFriendUid;
+    }
+
+    public Friend(int friendId, int foreignKeyColumn) {
         this.friendId = friendId;
-        this.pet = pet;
+        this.foreignKeyColumn = foreignKeyColumn;
+    }
+
+    //remove
+    public int getForeignKeyColumn() {
+        return foreignKeyColumn;
+    }
+
+    //remove
+    public void setForeignKeyColumn(int foreignKeyColumn) {
+        this.foreignKeyColumn = foreignKeyColumn;
     }
 
     public int getFriendId() {
         return friendId;
     }
 
-    public Pet getPet() {
-        return pet;
+    public int getPetFriendUid() {
+        return petFriendUid;
     }
+
 }
