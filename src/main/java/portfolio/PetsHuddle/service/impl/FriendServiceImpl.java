@@ -34,8 +34,9 @@ public class FriendServiceImpl implements FriendService {
         return friendRepository.findAll();
     }
 
-    @Override
-    public List<Friend> getFriendsListByPetId(int petId) {
-        return friendRepository.getFriendsListByPetId(petId);
-    }
+//    for unidirectional custom query
+//    @Override
+//    public List<Friend> getFriendsListByPetId(int petId) {
+//        return friendRepository.getFriendsListByPetId(petId);
+//    }
 }

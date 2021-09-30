@@ -37,10 +37,24 @@ public class Pet {
     private String userId;
 
 
+    //this is unidirectional only
+//    @JsonIgnore
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "foreign_key_column", referencedColumnName = "pet_id")
+//    private List<Friend> friendsList = new ArrayList<>();
+
+//    for bidirectional
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "foreign_key_column", referencedColumnName = "pet_id")
+    @OneToMany(mappedBy = "pet")
     private List<Friend> friendsList = new ArrayList<>();
+
+
+    //for many-to-many relationship between pets and events
+    @ManyToMany
+    @JoinTable( name = "pets_events",
+                joinColumns = @JoinColumn(name = "pet_id"),
+                inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<Event> eventsListForPets;
 
     public Pet() {
     }
@@ -114,6 +128,14 @@ public class Pet {
 
     public void setPetDescription(String petDescription) {
         this.petDescription = petDescription;
+    }
+
+    public List<Event> getEventsListForPets() {
+        return eventsListForPets;
+    }
+
+    public void addPetToEvent(Event event) {
+        eventsListForPets.add(event);
     }
 }
 

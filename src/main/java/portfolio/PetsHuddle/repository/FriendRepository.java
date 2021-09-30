@@ -7,6 +7,7 @@ import portfolio.PetsHuddle.model.Friend;
 import java.util.List;
 
 public interface FriendRepository extends JpaRepository<Friend, Integer> {
-    @Query("SELECT f FROM Friend f WHERE f.foreignKeyColumn = ?1")
-    List<Friend> getFriendsListByPetId(int petId);
+//    for unidirectional custom query
+//    @Query("SELECT f FROM Friend f WHERE f.foreignKeyColumn = ?1")
+//    List<Friend> getFriendsListByPetId(int petId);
 }

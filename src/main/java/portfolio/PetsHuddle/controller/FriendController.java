@@ -32,8 +32,9 @@ public class FriendController {
     }
 
     //api for getting friendslist by pet id
-    @GetMapping("/friendsbypetid/{petId}")
-    public List<Friend> getFriendsListByPetId(@PathVariable("petId") int petId) {
-        return friendService.getFriendsListByPetId(petId);
-    }
+    //    for unidirectional custom query
+//    @GetMapping("/friendsbypetid/{petId}")
+//    public List<Friend> getFriendsListByPetId(@PathVariable("petId") int petId) {
+//        return friendService.getFriendsListByPetId(petId);
+//    }
 }

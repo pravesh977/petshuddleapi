@@ -7,5 +7,6 @@ import java.util.List;
 public interface FriendService {
     Friend saveFriend(Friend friendObject);
     List<Friend> getAllFriends();
-    List<Friend> getFriendsListByPetId(int petId);
+    //    for unidirectional custom query
+//    List<Friend> getFriendsListByPetId(int petId);
 }

@@ -1,10 +1,13 @@
 package portfolio.PetsHuddle.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import portfolio.PetsHuddle.model.Event;
 import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.service.PetService;
+import portfolio.PetsHuddle.service.EventService;
 
 import java.util.List;
 
@@ -13,9 +16,11 @@ import java.util.List;
 public class PetController {
 
     private PetService petService;
+    private EventService eventService;
 
-    public PetController(PetService petService) {
+    public PetController(PetService petService, EventService eventService) {
         this.petService = petService;
+        this.eventService = eventService;
     }
 
     //build create new pet REST API
@@ -57,4 +62,17 @@ public class PetController {
 //    public List<Pet> getAllByAge(@PathVariable("age") int age) {
 //        return petService.findAllByAge(age);
 //    }
+
+    //api for inserting an event on a chosen pet
+    @JsonIgnore
+    @PutMapping("/{petId}/event/{eventId}")
+    Pet petJoinsEvent(
+            @PathVariable("petId") int petId,
+            @PathVariable("eventId") int eventId
+    ) {
+        Pet pet = petService.getPetById(petId);
+        Event event = eventService.getEventById(eventId);
+        pet.addPetToEvent(event);
+        return petService.savePet(pet);
+    }
 }
