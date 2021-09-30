@@ -8,6 +8,7 @@ import portfolio.PetsHuddle.repository.FriendRepository;
 import portfolio.PetsHuddle.service.FriendService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FriendServiceImpl implements FriendService {
@@ -23,13 +24,18 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public Friend saveFriend(Friend friendObject) {
-        logger.info("friend stuff is : " + friendObject.getFriendId());
-       friendRepository.save(friendObject);
-       return friendObject;
+        //logger.info("friend stuff is : " + friendObject.getFriendId());
+        friendRepository.save(friendObject);
+        return friendObject;
     }
 
     @Override
     public List<Friend> getAllFriends() {
         return friendRepository.findAll();
+    }
+
+    @Override
+    public List<Friend> getFriendsListByPetId(int petId) {
+        return friendRepository.getFriendsListByPetId(petId);
     }
 }

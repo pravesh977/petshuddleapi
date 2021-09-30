@@ -50,4 +50,11 @@ public class PetController {
         petService.deletePet(petId);
         return new ResponseEntity<String>("Pet deleted successfully", HttpStatus.OK);
     }
+
+    //this uses the column name and the parameter value in repository to make the query
+    //custom query and it becomes http://localhost:8080/api/petshuddle/petbyage/4
+//    @GetMapping("/petbyage/{age}")
+//    public List<Pet> getAllByAge(@PathVariable("age") int age) {
+//        return petService.findAllByAge(age);
+//    }
 }

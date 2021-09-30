@@ -10,4 +10,5 @@ public interface PetService {
     Pet getPetById(int petId);
     Pet updatePet(Pet pet, int petId);
     void deletePet(int petId);
+    //List<Pet> findAllByAge(int age);
 }

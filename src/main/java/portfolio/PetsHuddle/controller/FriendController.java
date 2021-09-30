@@ -25,9 +25,15 @@ public class FriendController {
         return newFriend;
     }
 
+    //api for getting all friends list
     @GetMapping
     public List<Friend> getAllFriends() {
         return friendService.getAllFriends();
     }
 
+    //api for getting friendslist by pet id
+    @GetMapping("/friendsbypetid/{petId}")
+    public List<Friend> getFriendsListByPetId(@PathVariable("petId") int petId) {
+        return friendService.getFriendsListByPetId(petId);
+    }
 }

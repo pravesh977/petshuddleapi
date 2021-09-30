@@ -14,7 +14,7 @@ public class Friend {
     @Column(name = "friend_id")
     private int friendId;
 
-    //remove
+    //this should be the same as the join column name
     @Column(name = "foreign_key_column")
     private int foreignKeyColumn;
 

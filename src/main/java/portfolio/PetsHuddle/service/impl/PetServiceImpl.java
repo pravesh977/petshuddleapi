@@ -79,4 +79,9 @@ public class PetServiceImpl implements PetService {
         }
         //fixme handle if pet doesn't exist
     }
+
+//    @Override
+//    public List<Pet> findAllByAge(int age) {
+//        return petrepository.findAllByAge(age);
+//    }
 }
