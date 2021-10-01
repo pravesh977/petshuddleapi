@@ -1,6 +1,6 @@
 package portfolio.PetsHuddle.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "pets")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "petId")
 public class Pet {
 
     @Id
@@ -50,10 +51,12 @@ public class Pet {
 
 
     //for many-to-many relationship between pets and events
-    @ManyToMany
+    //@JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable( name = "pets_events",
                 joinColumns = @JoinColumn(name = "pet_id"),
                 inverseJoinColumns = @JoinColumn(name = "event_id"))
+    //@JsonBackReference
     private List<Event> eventsListForPets;
 
     public Pet() {

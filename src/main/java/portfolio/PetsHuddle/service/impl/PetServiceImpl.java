@@ -11,6 +11,7 @@ import portfolio.PetsHuddle.repository.PetRepository;
 import portfolio.PetsHuddle.service.PetService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -35,15 +36,15 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet getPetById(int petId) {
-        Optional<Pet> pet = petrepository.findById(petId);
-        if (pet.isPresent()) {
+            Optional<Pet> pet = petrepository.findById(petId);
+            if (pet.isPresent()) {
             return pet.get();
-        }
-        else {
+            }
+            else {
             return null; //fixme: add exception handling
-//            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+//            return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
 //            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+            }
     }
 
     @Override
@@ -66,7 +67,7 @@ public class PetServiceImpl implements PetService {
 
         }
         else {
-            return null;
+            return null; //fixme: handle exception
         }
     }
 
@@ -78,6 +79,11 @@ public class PetServiceImpl implements PetService {
             petrepository.deleteById(petId);
         }
         //fixme handle if pet doesn't exist
+    }
+
+    @Override
+    public List<Pet> findAllByPetName(String searchPetValue) {
+        return petrepository.findAllByPetName(searchPetValue);
     }
 
 //    @Override

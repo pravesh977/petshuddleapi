@@ -40,4 +40,36 @@ public class EventServiceImpl implements EventService {
         return event;
     }
 
+    @Override
+    public Event updateEvent(Event passedEvent, int eventId) {
+        Optional<Event> existingEvent = eventRepository.findById(eventId);
+        if(existingEvent.isPresent()) {
+            Event newEvent = existingEvent.get();
+            newEvent.setEventTitle(passedEvent.getEventTitle());
+            newEvent.setEventDetails(passedEvent.getEventDetails());
+            newEvent.setEventLocation(passedEvent.getEventLocation());
+            newEvent.setEventDate(passedEvent.getEventDate());
+            eventRepository.save(newEvent);
+            return newEvent;
+        }
+        else {
+            return null; //fixme: handle exception
+        }
+    }
+
+    @Override
+    public void deleteEvent(int eventId) {
+        Optional<Event> existingEvent = eventRepository.findById(eventId);
+        if(existingEvent.isPresent()) {
+            eventRepository.deleteById(eventId);
+        } else {
+            //fixme: handle exception
+        }
+    }
+
+    @Override
+    public List<Event> searchEventsByName(String eventTitle) {
+        return eventRepository.findAllByEventNamesdf(eventTitle);
+    }
+
 }

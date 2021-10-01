@@ -1,8 +1,7 @@
 package portfolio.PetsHuddle.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "events")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "eventId")
 public class Event {
 
     @Id
@@ -30,9 +30,23 @@ public class Event {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date eventDate;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "eventsListForPets")
+    //@JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "eventsListForPets")
+    //@JsonManagedReference
     private List<Pet> petsListForEvent;
+
+//    public Event() {
+//
+//    }
+//
+//    public Event(int eventId, String eventTitle, String eventDetails, String eventLocation, Date eventDate, List<Pet> petsListForEvent) {
+//        this.eventId = eventId;
+//        this.eventTitle = eventTitle;
+//        this.eventDetails = eventDetails;
+//        this.eventLocation = eventLocation;
+//        this.eventDate = eventDate;
+//        this.petsListForEvent = petsListForEvent;
+//    }
 
     public int getEventId() {
         return eventId;
