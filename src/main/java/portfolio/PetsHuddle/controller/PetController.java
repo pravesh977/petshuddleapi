@@ -42,19 +42,33 @@ public class PetController {
     }
 
     //api for getting pet by id
+//    @GetMapping("{id}")
+//    public ResponseEntity<Pet> getPetById(@PathVariable("id") int petId) {
+//        ResponseEntity<Pet> matchingPet = new ResponseEntity<Pet>(petService.getPetById(petId), HttpStatus.OK);
+//        if(matchingPet != null) {
+//            logger.info("pet found");
+//            return matchingPet;
+//        }
+//        else {
+////                return new ResponseEntity.status(HttpStatus.BAD_REQUEST);
+////            return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
+////            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//            logger.info("pet does not exist");
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
     @GetMapping("{id}")
     public ResponseEntity<Pet> getPetById(@PathVariable("id") int petId) {
-        ResponseEntity<Pet> matchingPet = new ResponseEntity<Pet>(petService.getPetById(petId), HttpStatus.OK);
+        Pet matchingPet = petService.getPetById(petId);
         if(matchingPet != null) {
             logger.info("pet found");
-            return matchingPet;
+            return new ResponseEntity<Pet>(matchingPet, HttpStatus.OK);
         }
         else {
-//                return new ResponseEntity.status(HttpStatus.BAD_REQUEST);
-//            return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
-//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             logger.info("pet does not exist");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            //return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
         }
     }
 
