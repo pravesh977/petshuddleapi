@@ -31,7 +31,7 @@ public class Pet {
     @Column(name = "age", nullable = false)
     private int age;
 
-    @Column(name = "pet_description", nullable = false)
+    @Column(name = "pet_description", nullable = false, columnDefinition = "TEXT")
     private String petDescription;
 
     @Column(name = "user_id", nullable = false)

@@ -11,5 +11,7 @@ public interface PetService {
     Pet updatePet(Pet pet, int petId);
     void deletePet(int petId);
     List<Pet> findAllByPetName(String searchPetValue);
+    List<Pet> findAllByUserId(String userId);
     //List<Pet> findAllByAge(int age);
+
 }

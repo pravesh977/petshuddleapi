@@ -86,6 +86,11 @@ public class PetServiceImpl implements PetService {
         return petrepository.findAllByPetName(searchPetValue);
     }
 
+    @Override
+    public List<Pet> findAllByUserId(String userId) {
+        return petrepository.findAllByUserId(userId);
+    }
+
 //    @Override
 //    public List<Pet> findAllByAge(int age) {
 //        return petrepository.findAllByAge(age);

@@ -13,6 +13,8 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
     //@Param ensures that the value "petName" matches with the field of pet
     //called petName because everything is automatic
 
+    List<Pet> findAllByUserId(String userId);
+
     //to get all values based on column name
     //List<Pet> findAllByAge(int age);
 }

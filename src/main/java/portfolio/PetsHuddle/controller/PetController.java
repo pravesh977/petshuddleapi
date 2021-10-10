@@ -110,4 +110,10 @@ public class PetController {
     public List<Pet> findAllByName(@PathVariable("searchPetValue") String searchPetValue) {
         return petService.findAllByPetName(searchPetValue);
     }
+
+    //api for getting all pets that belong to a userId
+    @GetMapping("/userid/{userId}")
+    public List<Pet> allPetsByUserId(@PathVariable("userId") String userId) {
+        return petService.findAllByUserId(userId);
+    }
 }
