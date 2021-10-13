@@ -27,7 +27,7 @@ public class Event {
     private String eventLocation;
 
     @Column(name = "event_date", nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date eventDate;
 
     //@JsonIgnore
