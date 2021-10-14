@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("api/petshuddle")
 public class PetController {
 
-    Logger logger = LoggerFactory.getLogger(PetController.class);
+//    Logger logger = LoggerFactory.getLogger(PetController.class);
 
     private PetService petService;
     private EventService eventService;
@@ -62,11 +62,11 @@ public class PetController {
     public ResponseEntity<Pet> getPetById(@PathVariable("id") int petId) {
         Pet matchingPet = petService.getPetById(petId);
         if(matchingPet != null) {
-            logger.info("pet found");
+//            logger.info("pet found");
             return new ResponseEntity<Pet>(matchingPet, HttpStatus.OK);
         }
         else {
-            logger.info("pet does not exist");
+//            logger.info("pet does not exist");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             //return new ResponseEntity<Pet>(HttpStatus.NOT_FOUND);
         }
@@ -95,13 +95,13 @@ public class PetController {
     //api for inserting an event on a chosen pet
     //@JsonIgnore
     @PutMapping("/{petId}/event/{eventId}")
-    Pet petJoinsEvent(
+    Pet petAddsEvent(
             @PathVariable("petId") int petId,
             @PathVariable("eventId") int eventId
     ) {
         Pet pet = petService.getPetById(petId);
         Event event = eventService.getEventById(eventId);
-        pet.addPetToEvent(event);
+        pet.addEventForPet(event);
         return petService.savePet(pet);
     }
 

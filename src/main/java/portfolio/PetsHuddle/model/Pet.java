@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "pets")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "petId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "petId")
 public class Pet {
 
     @Id
@@ -50,15 +50,21 @@ public class Pet {
     private List<Friend> friendsList = new ArrayList<>();
 
 
-    //for many-to-many relationship between pets and events
-    //@JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable( name = "pets_events",
-                joinColumns = @JoinColumn(name = "pet_id"),
-                inverseJoinColumns = @JoinColumn(name = "event_id"))
-    //@JsonBackReference
+    //original working for pet side
+//    //for many-to-many relationship between pets and events
+//    //@JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable( name = "pets_events",
+//                joinColumns = @JoinColumn(name = "pet_id"),
+//                inverseJoinColumns = @JoinColumn(name = "event_id"))
+//    //@JsonBackReference
+//    private List<Event> eventsListForPets;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "petsListForEvent")
     private List<Event> eventsListForPets;
 
+    //constructors
     public Pet() {
     }
 
@@ -137,7 +143,7 @@ public class Pet {
         return eventsListForPets;
     }
 
-    public void addPetToEvent(Event event) {
+    public void addEventForPet(Event event) {
         eventsListForPets.add(event);
     }
 }

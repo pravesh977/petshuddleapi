@@ -2,6 +2,7 @@ package portfolio.PetsHuddle.model;
 
 
 import com.fasterxml.jackson.annotation.*;
+import portfolio.PetsHuddle.controller.EventController;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "events")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "eventId")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "eventId")
 public class Event {
 
     @Id
@@ -30,23 +31,33 @@ public class Event {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date eventDate;
 
-    //@JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "eventsListForPets")
-    //@JsonManagedReference
+    //original working for pet side
+//    //for bidirectional
+//    //@JsonIgnore
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "eventsListForPets")
+//    //@JsonManagedReference
+//    private List<Pet> petsListForEvent;
+
+    @ManyToMany
+    @JoinTable(
+            name = "pets_events",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "pet_id")
+    )
     private List<Pet> petsListForEvent;
 
-//    public Event() {
+    //constructors why needed? not here before
+    public Event() {
+
+    }
 //
-//    }
-//
-//    public Event(int eventId, String eventTitle, String eventDetails, String eventLocation, Date eventDate, List<Pet> petsListForEvent) {
-//        this.eventId = eventId;
-//        this.eventTitle = eventTitle;
-//        this.eventDetails = eventDetails;
-//        this.eventLocation = eventLocation;
-//        this.eventDate = eventDate;
-//        this.petsListForEvent = petsListForEvent;
-//    }
+    public Event(int eventId, String eventTitle, String eventDetails, String eventLocation, Date eventDate) {
+        this.eventId = eventId;
+        this.eventTitle = eventTitle;
+        this.eventDetails = eventDetails;
+        this.eventLocation = eventLocation;
+        this.eventDate = eventDate;
+    }
 
     public int getEventId() {
         return eventId;
@@ -90,5 +101,9 @@ public class Event {
 
     public List<Pet> getPetsListForEvent() {
         return petsListForEvent;
+    }
+
+    public void addPetToEvent(Pet pet) {
+        petsListForEvent.add(pet);
     }
 }

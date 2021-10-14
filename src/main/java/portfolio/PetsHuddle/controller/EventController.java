@@ -1,11 +1,15 @@
 package portfolio.PetsHuddle.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import portfolio.PetsHuddle.model.Event;
+import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.service.EventService;
+import portfolio.PetsHuddle.service.PetService;
 
 import java.util.List;
 
@@ -13,10 +17,15 @@ import java.util.List;
 @RequestMapping("api/events")
 public class EventController {
 
-    private EventService eventService;
+//    Logger logger = LoggerFactory.getLogger(EventController.class);
 
-    public EventController(EventService eventService) {
+
+    private EventService eventService;
+    private PetService petService;
+
+    public EventController(EventService eventService, PetService petService) {
         this.eventService = eventService;
+        this.petService = petService;
     }
 
     //end point to get all events
@@ -55,5 +64,20 @@ public class EventController {
     @GetMapping("/searchevents/{searchEventsValue}")
     public List<Event> searchEventsByName(@PathVariable("searchEventsValue") String searchEventsValue){
         return eventService.searchEventsByName(searchEventsValue);
+    }
+
+    //api for inserting an event on a chosen pet
+    //@JsonIgnore
+    @PutMapping("/{eventId}/pet/{petId}")
+    Event petJoinsEvent(
+            @PathVariable("eventId") int eventId,
+            @PathVariable("petId") int petId
+    ) {
+        Event event = eventService.getEventById(eventId);
+        Pet pet = petService.getPetById(petId);
+//        logger.info(pet.getPetName() + " name");
+//        logger.info(event.getEventTitle() + " title");
+        event.addPetToEvent(pet);
+        return eventService.saveEvent(event);
     }
 }
