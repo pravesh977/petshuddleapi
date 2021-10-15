@@ -69,7 +69,7 @@ public class EventController {
     //api for inserting an event on a chosen pet
     //@JsonIgnore
     @PutMapping("/{eventId}/pet/{petId}")
-    Event petJoinsEvent(
+    public ResponseEntity<Event> petJoinsEvent(
             @PathVariable("eventId") int eventId,
             @PathVariable("petId") int petId
     ) {
@@ -78,6 +78,7 @@ public class EventController {
 //        logger.info(pet.getPetName() + " name");
 //        logger.info(event.getEventTitle() + " title");
         event.addPetToEvent(pet);
-        return eventService.saveEvent(event);
+        ResponseEntity<Event> newEvent = new ResponseEntity<Event>(eventService.saveEvent(event), HttpStatus.OK);
+        return newEvent;
     }
 }
