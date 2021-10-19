@@ -7,6 +7,7 @@ import portfolio.PetsHuddle.controller.EventController;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -21,7 +22,7 @@ public class Event {
     @Column(name = "event_title", nullable = false)
     private String eventTitle;
 
-    @Column(name = "event_details", nullable = false)
+    @Column(name = "event_details", nullable = false, length = 1700)
     private String eventDetails;
 
     @Column(name = "event_location", nullable = false)
@@ -31,6 +32,8 @@ public class Event {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date eventDate;
 
+    @Column(name = "user_id", nullable = false)
+    private String userId;
     //original working for pet side
 //    //for bidirectional
 //    //@JsonIgnore
@@ -44,7 +47,9 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "pet_id")
     )
-    private List<Pet> petsListForEvent;
+    private Set<Pet> petsListForEvent;
+    //private List<Pet> petsListForEvent;
+
 
     //constructors why needed? not here before
     public Event() {
@@ -99,7 +104,15 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public List<Pet> getPetsListForEvent() {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Set<Pet> getPetsListForEvent() {
         return petsListForEvent;
     }
 
