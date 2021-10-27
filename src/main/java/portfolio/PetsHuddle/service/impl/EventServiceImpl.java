@@ -1,7 +1,9 @@
 package portfolio.PetsHuddle.service.impl;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import portfolio.PetsHuddle.model.Event;
+import portfolio.PetsHuddle.model.EventsMonthlyReport;
 import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.repository.EventRepository;
 import portfolio.PetsHuddle.service.EventService;
@@ -20,7 +22,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+        return eventRepository.findAll(Sort.by(Sort.Direction.DESC, "eventDate"));
     }
 
     @Override
@@ -71,5 +73,24 @@ public class EventServiceImpl implements EventService {
     public List<Event> searchEventsByName(String eventTitle) {
         return eventRepository.findAllByEventNamesdf(eventTitle);
     }
+
+//    @Override
+//    public EventsMonthlyReport monthlyEventNumber(String eventMonth) {
+//        EventsMonthlyReport newReport = new EventsMonthlyReport(eventRepository.monthlyEventNumber(eventMonth), 999);
+//        return newReport;
+//    }
+
+    @Override
+    public EventsMonthlyReport reportByMonth(String eventMonth) {
+        List<Event> resultingEvent = eventRepository.eventsListByMonth(eventMonth);
+        int numOfEvents = resultingEvent.size();
+        int numOfPetsForEvent = 0;
+        for(Event element:resultingEvent) {
+            numOfPetsForEvent = element.getPetsListForEvent().size() + numOfPetsForEvent;
+        }
+        EventsMonthlyReport newMonthlyReport = new EventsMonthlyReport(numOfEvents, numOfPetsForEvent);
+        return newMonthlyReport;
+    }
+
 
 }

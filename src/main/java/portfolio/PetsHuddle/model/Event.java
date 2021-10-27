@@ -19,13 +19,13 @@ public class Event {
     @Column(name = "event_id", nullable = false)
     private int eventId;
 
-    @Column(name = "event_title", nullable = false)
+    @Column(name = "event_title", nullable = false, length = 30)
     private String eventTitle;
 
-    @Column(name = "event_details", nullable = false, length = 1700)
+    @Column(name = "event_details", nullable = false, length = 1000)
     private String eventDetails;
 
-    @Column(name = "event_location", nullable = false)
+    @Column(name = "event_location", nullable = false, length = 30)
     private String eventLocation;
 
     @Column(name = "event_date", nullable = false)
@@ -119,4 +119,5 @@ public class Event {
     public void addPetToEvent(Pet pet) {
         petsListForEvent.add(pet);
     }
+
 }

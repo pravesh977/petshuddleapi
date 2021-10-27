@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import portfolio.PetsHuddle.model.Event;
+import portfolio.PetsHuddle.model.EventsMonthlyReport;
 import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.service.EventService;
 import portfolio.PetsHuddle.service.PetService;
@@ -61,6 +62,7 @@ public class EventController {
         return new ResponseEntity<String>("Event Deleted", HttpStatus.OK);
     }
 
+    //endpoint for searching event using event name
     @GetMapping("/searchevents/{searchEventsValue}")
     public List<Event> searchEventsByName(@PathVariable("searchEventsValue") String searchEventsValue){
         return eventService.searchEventsByName(searchEventsValue);
@@ -80,5 +82,21 @@ public class EventController {
         event.addPetToEvent(pet);
         ResponseEntity<Event> newEvent = new ResponseEntity<Event>(eventService.saveEvent(event), HttpStatus.OK);
         return newEvent;
+    }
+
+    //endpoint for finding events based on month name for report
+    @GetMapping("/eventsbymonth/{eventMonth}")
+//    public int numberOfEventsByMonth(@PathVariable("eventMonth") String eventMonth){
+//        return eventService.monthlyEventNumber(eventMonth);
+//    }
+
+//    public ResponseEntity<EventsMonthlyReport> numberOfEventsByMonth(@PathVariable ("eventMonth") String eventMonth) {
+//        //int numOfEvents = eventService.monthlyEventNumber(eventMonth);
+//        return new ResponseEntity<EventsMonthlyReport>(eventService.monthlyEventNumber(eventMonth), HttpStatus.OK);
+//    }
+    public ResponseEntity<EventsMonthlyReport> reportByMonth(@PathVariable ("eventMonth") String eventMonth) {
+        //int numOfEvents = eventService.monthlyEventNumber(eventMonth);
+        ResponseEntity<EventsMonthlyReport> newReport = new ResponseEntity<EventsMonthlyReport>(eventService.reportByMonth(eventMonth), HttpStatus.OK);
+        return newReport;
     }
 }

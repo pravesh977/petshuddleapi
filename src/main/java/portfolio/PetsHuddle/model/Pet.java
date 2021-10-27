@@ -16,22 +16,22 @@ public class Pet {
     @Column(name = "pet_id", nullable = false)
     private int petId;
 
-    @Column(name = "pet_name", nullable = false)
+    @Column(name = "pet_name", nullable = false, length = 30)
     private String petName;
 
-    @Column(name = "species", nullable = false)
+    @Column(name = "species", nullable = false, length = 30)
     private String species;
 
-    @Column(name = "sex", nullable = false)
+    @Column(name = "sex", nullable = false, length = 10)
     private String sex;
 
-    @Column(name = "breed", nullable = false)
+    @Column(name = "breed", nullable = false, length = 30)
     private String breed;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "age", nullable = false, length = 3)
     private int age;
 
-    @Column(name = "pet_description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "pet_description", nullable = false, length = 1000)
     private String petDescription;
 
     @Column(name = "user_id", nullable = false)
