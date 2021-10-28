@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pets")
@@ -39,15 +40,19 @@ public class Pet {
 
 
     //this is unidirectional only
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "foreign_key_column", referencedColumnName = "pet_id")
-//    private List<Friend> friendsList = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id")
+    private List<Friend> friendsList = new ArrayList<>();
 
 //    for bidirectional
-    @JsonIgnore
-    @OneToMany(mappedBy = "pet")
-    private List<Friend> friendsList = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "pet")
+//    private List<Friend> friendsList = new ArrayList<>();
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "pet")
+//    private Set<Friend> friendsList;
 
 
     //original working for pet side
@@ -110,6 +115,11 @@ public class Pet {
     public String getUserId() {
         return userId;
     }
+
+//    public List<Friend> getFriendsList() {
+//        return friendsList;
+//    }
+
 
     public List<Friend> getFriendsList() {
         return friendsList;

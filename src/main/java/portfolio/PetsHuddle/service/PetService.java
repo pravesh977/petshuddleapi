@@ -13,5 +13,6 @@ public interface PetService {
     List<Pet> findAllByPetName(String searchPetValue);
     List<Pet> findAllByUserId(String userId);
     //List<Pet> findAllByAge(int age);
+    List<Pet> listOfFriendsForPet(List<Integer> friendsIdList);
 
 }

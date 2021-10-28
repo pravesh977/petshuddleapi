@@ -17,4 +17,9 @@ public interface PetRepository extends JpaRepository<Pet, Integer> {
 
     //to get all values based on column name
     //List<Pet> findAllByAge(int age);
+
+    @Query("SELECT p FROM Pet p WHERE petId IN (:friendId)")
+    List<Pet> getListOfFriendsForPet(List<Integer> friendId);
+
+
 }

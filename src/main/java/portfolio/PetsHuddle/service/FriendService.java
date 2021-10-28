@@ -8,5 +8,6 @@ public interface FriendService {
     Friend saveFriend(Friend friendObject);
     List<Friend> getAllFriends();
     //    for unidirectional custom query
-//    List<Friend> getFriendsListByPetId(int petId);
+    List<Friend> getFriendsListByPetId(int petId);
+
 }

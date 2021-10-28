@@ -91,6 +91,12 @@ public class PetServiceImpl implements PetService {
         return petrepository.findAllByUserId(userId);
     }
 
+    @Override
+    public List<Pet> listOfFriendsForPet(List<Integer> friendsIdList) {
+        return petrepository.getListOfFriendsForPet(friendsIdList);
+    }
+
+
 //    @Override
 //    public List<Pet> findAllByAge(int age) {
 //        return petrepository.findAllByAge(age);

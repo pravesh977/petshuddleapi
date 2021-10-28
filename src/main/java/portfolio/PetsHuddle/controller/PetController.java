@@ -116,4 +116,16 @@ public class PetController {
     public List<Pet> allPetsByUserId(@PathVariable("userId") String userId) {
         return petService.findAllByUserId(userId);
     }
+
+    @PostMapping("/petfriends")
+    public List<Pet> listOfFriendsForPet(@RequestBody List<Integer> friendsIdList) {
+        return petService.listOfFriendsForPet(friendsIdList);
+    }
+
+//    @GetMapping("/petfriends")
+//    public List<Pet> listOfFriendsForPet(@RequestBody List<Integer> friendsIdList) {
+//        return petService.listOfFriendsForPet(friendsIdList);
+//    }
+
+
 }
