@@ -40,4 +40,9 @@ public class FriendServiceImpl implements FriendService {
         return friendRepository.getFriendsListByPetId(petId);
     }
 
+    @Override
+    public List<Friend> getFriendRequestsForPet(int petId) {
+        return friendRepository.getFriendRequestsForPet(petId);
+    }
+
 }

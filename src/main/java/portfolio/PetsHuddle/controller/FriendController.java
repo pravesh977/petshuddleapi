@@ -38,4 +38,8 @@ public class FriendController {
         return friendService.getFriendsListByPetId(petId);
     }
 
+    @GetMapping("/friendrequests/{petId}")
+    public List<Friend> getFriendRequestsForPet(@PathVariable("petId") int petId) {
+        return friendService.getFriendRequestsForPet(petId);
+    }
 }

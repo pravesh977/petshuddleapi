@@ -9,5 +9,5 @@ public interface FriendService {
     List<Friend> getAllFriends();
     //    for unidirectional custom query
     List<Friend> getFriendsListByPetId(int petId);
-
+    List<Friend> getFriendRequestsForPet(int petId);
 }

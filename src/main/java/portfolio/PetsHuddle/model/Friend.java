@@ -23,6 +23,8 @@ public class Friend {
     @Id
     private int petId;
 
+    @Column(name = "request_status")
+    private char requestStatus;
 //    for bidirectional
 //    @JsonIgnore
 //    @ManyToOne(cascade = CascadeType.ALL)
@@ -32,10 +34,11 @@ public class Friend {
     public Friend() {
     }
 
-//    public Friend(int friendId, int foreignKeyColumn) {
-//        this.friendId = friendId;
-//        this.foreignKeyColumn = foreignKeyColumn;
-//    }
+    public Friend(int friendId, int petId, char requestStatus) {
+        this.friendId = friendId;
+        this.petId = petId;
+        this.requestStatus = requestStatus;
+    }
 //
 //    //remove
 //    public int getForeignKeyColumn() {
@@ -69,5 +72,13 @@ public class Friend {
 
     public void setPetId(int petId) {
         this.petId = petId;
+    }
+
+    public char getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(char requestStatus) {
+        this.requestStatus = requestStatus;
     }
 }

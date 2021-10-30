@@ -117,15 +117,11 @@ public class PetController {
         return petService.findAllByUserId(userId);
     }
 
+    //api for getting profiles of friends by sending it an array of friends ids
     @PostMapping("/petfriends")
     public List<Pet> listOfFriendsForPet(@RequestBody List<Integer> friendsIdList) {
         return petService.listOfFriendsForPet(friendsIdList);
     }
-
-//    @GetMapping("/petfriends")
-//    public List<Pet> listOfFriendsForPet(@RequestBody List<Integer> friendsIdList) {
-//        return petService.listOfFriendsForPet(friendsIdList);
-//    }
 
 
 }
