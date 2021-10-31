@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import portfolio.PetsHuddle.model.Friend;
+import portfolio.PetsHuddle.model.FriendId;
+import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.service.FriendService;
 
 import java.util.List;
@@ -38,6 +40,22 @@ public class FriendController {
         return friendService.getFriendsListByPetId(petId);
     }
 
+    //building update friend api
+//    @PutMapping("{friendId}")
+//    public ResponseEntity<Friend> updateFriend(@PathVariable("friendId") FriendId friendId, @RequestBody Friend friend) {
+//        return new ResponseEntity<Friend>(friendService.updateFriend(friend, friendId), HttpStatus.OK);
+//    }
+
+    @PutMapping("/friendid/{friendId}/petid/{petId}")
+    public ResponseEntity<Friend> updateFriend(
+            @PathVariable("friendId") int friendId,
+            @PathVariable("petId") int petId,
+            @RequestBody Friend friend) {
+        FriendId compositeFriendIdObject = new FriendId(friendId, petId);
+        return new ResponseEntity<Friend>(friendService.updateFriend(friend, compositeFriendIdObject), HttpStatus.OK);
+    }
+
+    //api for getting friend requests for selected pet with pending requests
     @GetMapping("/friendrequests/{petId}")
     public List<Friend> getFriendRequestsForPet(@PathVariable("petId") int petId) {
         return friendService.getFriendRequestsForPet(petId);

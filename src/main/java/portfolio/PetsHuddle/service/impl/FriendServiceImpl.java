@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import portfolio.PetsHuddle.model.Friend;
+import portfolio.PetsHuddle.model.FriendId;
+import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.repository.FriendRepository;
 import portfolio.PetsHuddle.service.FriendService;
 
@@ -43,6 +45,25 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public List<Friend> getFriendRequestsForPet(int petId) {
         return friendRepository.getFriendRequestsForPet(petId);
+    }
+
+    @Override
+    public Friend updateFriend(Friend friendToBeUpdated, FriendId friendId) {
+        Optional<Friend> existingFriend = friendRepository.findById(friendId);
+        if(existingFriend.isPresent()) {
+
+            Friend newFriend = existingFriend.get();
+            newFriend.setFriendId(friendToBeUpdated.getFriendId());
+            newFriend.setPetId(friendToBeUpdated.getPetId());
+            newFriend.setRequestStatus(friendToBeUpdated.getRequestStatus());
+
+//            friendRepository.save(newFriend);
+            return newFriend;
+        }
+        else {
+            return null; //fixme: handle exception
+        }
+
     }
 
 }
