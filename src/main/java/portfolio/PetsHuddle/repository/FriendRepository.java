@@ -3,11 +3,11 @@ package portfolio.PetsHuddle.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import portfolio.PetsHuddle.model.Friend;
-import portfolio.PetsHuddle.model.FriendId;
+import portfolio.PetsHuddle.model.CompositeFriendId;
 
 import java.util.List;
 
-public interface FriendRepository extends JpaRepository<Friend, FriendId> {
+public interface FriendRepository extends JpaRepository<Friend, CompositeFriendId> {
 //    for unidirectional custom query
     @Query("SELECT f FROM Friend f WHERE f.petId = ?1")
     List<Friend> getFriendsListByPetId(int petId);

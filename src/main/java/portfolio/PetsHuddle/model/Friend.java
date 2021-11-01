@@ -1,11 +1,9 @@
 package portfolio.PetsHuddle.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
-@IdClass(FriendId.class)
+@IdClass(CompositeFriendId.class)
 @Table(name = "friends")
 public class Friend {
 

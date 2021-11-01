@@ -4,8 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import portfolio.PetsHuddle.model.Friend;
-import portfolio.PetsHuddle.model.FriendId;
-import portfolio.PetsHuddle.model.Pet;
+import portfolio.PetsHuddle.model.CompositeFriendId;
 import portfolio.PetsHuddle.service.FriendService;
 
 import java.util.List;
@@ -51,7 +50,7 @@ public class FriendController {
             @PathVariable("friendId") int friendId,
             @PathVariable("petId") int petId,
             @RequestBody Friend friend) {
-        FriendId compositeFriendIdObject = new FriendId(friendId, petId);
+        CompositeFriendId compositeFriendIdObject = new CompositeFriendId(friendId, petId);
         return new ResponseEntity<Friend>(friendService.updateFriend(friend, compositeFriendIdObject), HttpStatus.OK);
     }
 
