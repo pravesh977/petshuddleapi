@@ -3,6 +3,7 @@ package portfolio.PetsHuddle.controller;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,8 @@ import portfolio.PetsHuddle.service.PetService;
 import portfolio.PetsHuddle.service.EventService;
 import portfolio.PetsHuddle.service.impl.FriendServiceImpl;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
@@ -81,8 +84,12 @@ public class PetController {
     //building delete pets rest api
     @DeleteMapping("{id}")
     public ResponseEntity<String> deletePet(@PathVariable("id") int petId) {
-        petService.deletePet(petId);
-        return new ResponseEntity<String>("Pet deleted successfully", HttpStatus.OK);
+        try {
+            petService.deletePet(petId);
+        } catch (DataIntegrityViolationException exception) {
+            return new ResponseEntity<String>("Pet Delete Constraint", HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<String>("Pet deleted", HttpStatus.OK);
     }
 
     //this uses the column name and the parameter value in repository to make the query

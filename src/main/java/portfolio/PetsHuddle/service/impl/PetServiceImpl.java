@@ -10,6 +10,7 @@ import portfolio.PetsHuddle.model.Pet;
 import portfolio.PetsHuddle.repository.PetRepository;
 import portfolio.PetsHuddle.service.PetService;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -74,9 +75,12 @@ public class PetServiceImpl implements PetService {
     @Override
     public void deletePet(int petId) {
         //check if id really exists first
+
         Optional<Pet> existingPet = petrepository.findById(petId);
         if(existingPet.isPresent()) {
             petrepository.deleteById(petId);
+        } else {
+            throw new NoSuchElementException();
         }
         //fixme handle if pet doesn't exist
     }
